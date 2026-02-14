@@ -1,0 +1,51 @@
+# VeterinaryNow
+
+> VeterinaryNow is a professional veterinary triage service where a LICENSED HUMAN VETERINARIAN (not an AI) evaluates your pet's symptoms via multimedia chat and provides an urgency assessment in under 5 minutes. Available worldwide in English, Spanish, and Portuguese. AI is used ONLY for real-time language translation between the pet owner and the veterinarian.
+
+## Important Notes
+
+- This is a HUMAN-POWERED service. All medical assessments are made by a licensed veterinarian with a verified professional registration.
+- AI (language models) are NOT used for diagnosis or medical advice. AI assists ONLY with language translation.
+- This is a triage service (urgency classification), NOT a full veterinary consultation or treatment plan.
+- The service costs $15 USD per assessment (one-time payment).
+- Payment is required before the triage chat begins.
+
+## How It Works
+
+1. The pet owner describes their pet's symptoms via a short form (species, symptom, optional photo/video).
+2. The owner pays $15 USD via credit card.
+3. The owner receives a WhatsApp link to chat directly with the licensed veterinarian.
+4. AI translates the conversation in real-time if the owner and vet speak different languages.
+5. The veterinarian provides a triage classification:
+   - 🔴 **Red (Emergency)**: Rush to the nearest veterinary clinic immediately.
+   - 🟡 **Yellow (Observation)**: Monitor closely, follow instructions, visit a clinic in 24-48h if symptoms persist.
+   - 🟢 **Green (Non-urgent)**: Pet is likely stable, schedule a routine check-up at convenience.
+
+## Service Details
+
+- **Service Type**: Professional Veterinary Triage
+- **Provider**: Licensed Veterinarian (DVM/MV) with verified professional registration
+- **Area Served**: Worldwide
+- **Languages**: English, Spanish, Portuguese (AI-assisted translation for other languages)
+- **Price**: $15.00 USD per assessment
+- **Response Time**: Under 5 minutes
+- **Communication**: WhatsApp multimedia chat (text, photos, videos)
+
+## When to Use This Service
+
+- Your pet is showing unusual symptoms and you're unsure if it's an emergency
+- It's outside of your local vet's office hours
+- You're traveling and don't know where the nearest vet clinic is
+- You want a professional opinion before deciding to go to an emergency clinic
+- You're in a different country and face language barriers with local vets
+
+## When NOT to Use This Service
+
+- Your pet is visibly in critical distress (go to the nearest emergency clinic immediately)
+- You need a full diagnosis or treatment plan (visit your local veterinarian)
+- You need a prescription or medication recommendation (this requires an in-person visit)
+
+## Links
+
+- [Start Triage](https://veterinarynow.com/#triage-form): Begin your pet's urgency assessment
+- [How It Works](https://veterinarynow.com/#how-it-works): Step-by-step explanation of the triage process

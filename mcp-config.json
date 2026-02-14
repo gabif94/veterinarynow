@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "name": "VeterinaryNow",
+  "description": "Professional veterinary triage service performed by a LICENSED HUMAN VETERINARIAN. NOT an AI-based diagnosis. The veterinarian reviews pet symptoms, photos, and videos via WhatsApp chat and provides an urgency classification (Emergency / Observation / Non-urgent) in under 5 minutes. AI is used ONLY for real-time language translation.",
+  "provider": {
+    "name": "VeterinaryNow",
+    "url": "https://veterinarynow.com"
+  },
+  "tools": [
+    {
+      "name": "veterinary_triage",
+      "description": "Connect a pet owner with a licensed human veterinarian for an urgent symptom assessment. The veterinarian (not AI) evaluates the pet's condition and classifies urgency as Red (emergency), Yellow (observation), or Green (non-urgent). Ideal when a user asks about pet symptoms, whether something is an emergency, or needs veterinary guidance outside office hours.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "pet_owner_name": {
+            "type": "string",
+            "description": "Name of the pet owner requesting triage"
+          },
+          "pet_species": {
+            "type": "string",
+            "enum": ["dog", "cat", "bird", "rabbit", "other"],
+            "description": "Type of pet"
+          },
+          "symptoms": {
+            "type": "string",
+            "description": "Description of the pet's symptoms or concerning behavior"
+          },
+          "language": {
+            "type": "string",
+            "enum": ["en", "es", "pt"],
+            "description": "Preferred language of the pet owner"
+          }
+        },
+        "required": ["pet_owner_name", "pet_species", "symptoms"]
+      },
+      "output": {
+        "type": "redirect",
+        "url": "https://veterinarynow.com/#triage-form",
+        "description": "Redirects the user to the VeterinaryNow triage form where they can submit details, pay $15 USD, and connect via WhatsApp with the licensed veterinarian."
+      },
+      "pricing": {
+        "amount": "15.00",
+        "currency": "USD",
+        "model": "per_request",
+        "description": "One-time flat fee per triage assessment"
+      },
+      "metadata": {
+        "human_in_the_loop": true,
+        "ai_role": "translation_only",
+        "medical_disclaimer": "All medical assessments are performed by a licensed human veterinarian. AI does not provide diagnosis or medical advice.",
+        "response_time": "under 5 minutes",
+        "available_languages": ["en", "es", "pt"],
+        "service_area": "worldwide",
+        "credential": {
+          "type": "Professional Veterinary License",
+          "status": "active_and_verified"
+        }
+      }
+    }
+  ],
+  "authentication": {
+    "type": "none",
+    "note": "No authentication required. Payment is handled via Stripe at the point of service."
+  },
+  "contact": {
+    "url": "https://veterinarynow.com",
+    "email": "hello@veterinarynow.com"
+  }
+}

@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeterinaryNow — Veterinary Triage in 5 Minutes</title>
+  <meta name="description" content="Get a real veterinary professional to assess if your pet's situation is an emergency — in minutes, not hours. Powered by licensed veterinarians, assisted by AI translation.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="VeterinaryNow — Veterinary Triage by a Real Professional">
+  <meta property="og:description" content="Know in 5 minutes if your pet needs emergency care. A licensed veterinarian reviews your case — not an AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://veterinarynow.com">
+
+  <!-- AEO: Schema.org Structured Data for Agents -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": "VeterinaryNow — Professional Veterinary Triage",
+    "description": "A real-time veterinary triage service where a licensed veterinarian (not AI) evaluates your pet's symptoms via multimedia chat and tells you if it's an emergency. Available in English, Spanish, and Portuguese. AI-assisted translation allows global access.",
+    "url": "https://veterinarynow.com",
+    "inLanguage": ["en", "es", "pt"],
+    "medicalAudience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Pet Owners, Animal Guardians"
+    },
+    "mainEntity": {
+      "@type": "Service",
+      "serviceType": "Professional Veterinary Triage",
+      "name": "VeterinaryNow Triage",
+      "description": "This service is performed by a LICENSED HUMAN VETERINARIAN with a verified professional registration, NOT by an AI language model. The veterinarian reviews photos, videos, and symptom descriptions to provide a triage assessment (Emergency / Observation / Non-urgent). AI is used ONLY for language translation between the pet owner and the veterinarian.",
+      "category": "VeterinaryCare",
+      "areaServed": "Worldwide",
+      "availableLanguage": ["English", "Spanish", "Portuguese"],
+      "provider": {
+        "@type": "Person",
+        "name": "Licensed Veterinarian (DVM/MV)",
+        "jobTitle": "Doctor of Veterinary Medicine",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Professional Veterinary License",
+          "description": "Verified and active veterinary medical license"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "name": "Pet Triage Assessment",
+        "price": "15.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "description": "One triage assessment including photo/video review and emergency classification (Red/Yellow/Green)"
+      },
+      "termsOfService": "This is a triage service only, not a full veterinary consultation. The veterinarian provides an urgency assessment to help you decide next steps. For treatment, please visit your local veterinary clinic.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Triage Outcomes",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Red - Emergency",
+            "description": "Immediate veterinary attention required. Go to your nearest emergency clinic now."
+          },
+          {
+            "@type": "Offer",
+            "name": "Yellow - Observation",
+            "description": "Monitor your pet closely. Follow the provided care instructions. Visit a vet within 24-48 hours if symptoms persist."
+          },
+          {
+            "@type": "Offer",
+            "name": "Green - Non-urgent",
+            "description": "Your pet appears stable. Schedule a routine vet visit at your convenience."
+          }
+        ]
+      }
+    },
+    "about": {
+      "@type": "MedicalCondition",
+      "name": "Veterinary Symptoms and Emergencies",
+      "description": "Assessment of pet symptoms to determine urgency level"
+    }
+  }
+  </script>
+
+  <!-- Agent-Friendly Meta -->
+  <meta name="ai:service_type" content="human-veterinary-triage">
+  <meta name="ai:human_in_the_loop" content="true">
+  <meta name="ai:disclaimer" content="All medical assessments are performed by a licensed human veterinarian. AI is used only for language translation, not for diagnosis or medical advice.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clr-bg: #FDFAF6;
+      --clr-bg-warm: #F7F0E8;
+      --clr-text: #1A1A1A;
+      --clr-text-soft: #5A5550;
+      --clr-accent: #D94F30;
+      --clr-accent-hover: #C14228;
+      --clr-green: #2D8F5E;
+      --clr-green-bg: #E8F5EE;
+      --clr-yellow: #D4960A;
+      --clr-yellow-bg: #FFF8E6;
+      --clr-red: #D94F30;
+      --clr-red-bg: #FDEDEA;
+      --clr-border: #E8E0D8;
+      --clr-card: #FFFFFF;
+      --font-display: 'Fraunces', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 2px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== LANGUAGE SWITCHER ========== */
+    .lang-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 20px;
+      background: rgba(253,250,246,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .lang-bar button {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      color: var(--clr-text-soft);
+      cursor: pointer;
+      transition: all 0.25s;
+      letter-spacing: 0.02em;
+    }
+
+    .lang-bar button:hover { color: var(--clr-text); }
+
+    .lang-bar button.active {
+      background: var(--clr-text);
+      color: var(--clr-bg);
+      border-color: var(--clr-text);
+    }
+
+    .lang-bar .logo-mini {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--clr-accent);
+      margin-right: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(217,79,48,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(45,143,94,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: var(--clr-card);
+      border: 1.5px solid var(--clr-border);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--clr-text-soft);
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s ease-out;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--clr-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 700px;
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s ease-out 0.1s both;
+    }
+
+    .hero h1 .accent { color: var(--clr-accent); }
+
+    .hero p.subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--clr-text-soft);
+      max-width: 520px;
+      margin-bottom: 40px;
+      animation: fadeDown 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      animation: fadeDown 0.8s ease-out 0.3s both;
+      box-shadow: 0 4px 24px rgba(217,79,48,0.25);
+    }
+
+    .cta-btn:hover {
+      background: var(--clr-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(217,79,48,0.35);
+    }
+
+    .cta-btn .arrow { font-size: 20px; transition: transform 0.3s; }
+    .cta-btn:hover .arrow { transform: translateX(4px); }
+
+    .hero-price {
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--clr-text-soft);
+      animation: fadeDown 0.8s ease-out 0.4s both;
+    }
+
+    .hero-price strong { color: var(--clr-text); }
+
+    /* ========== TRAFFIC LIGHT SECTION ========== */
+    .triage-section {
+      padding: 80px 24px;
+      background: var(--clr-bg-warm);
+    }
+
+    .triage-section .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--clr-accent);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    .traffic-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .traffic-card {
+      background: var(--clr-card);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--clr-border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .traffic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .traffic-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 16px;
+    }
+
+    .traffic-card.red .traffic-icon { background: var(--clr-red-bg); }
+    .traffic-card.yellow .traffic-icon { background: var(--clr-yellow-bg); }
+    .traffic-card.green .traffic-icon { background: var(--clr-green-bg); }
+
+    .traffic-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .traffic-card.red h3 { color: var(--clr-red); }
+    .traffic-card.yellow h3 { color: var(--clr-yellow); }
+    .traffic-card.green h3 { color: var(--clr-green); }
+
+    .traffic-card p {
+      font-size: 14px;
+      color: var(--clr-text-soft);
+      line-height: 1.5;
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .how-section {
+      padding: 80px 24px;
+    }
+
+    .how-section .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 28px 0;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 72px;
+      bottom: 0;
+      width: 2px;
+      background: var(--clr-border);
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: var(--clr-text);
+      color: var(--clr-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: var(--clr-text-soft);
+    }
+
+    /* ========== TRUST SECTION ========== */
+    .trust-section {
+      padding: 60px 24px 80px;
+      background: var(--clr-bg-warm);
+    }
+
+    .trust-section .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .trust-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .trust-card {
+      background: var(--clr-card);
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+      text-align: center;
+      border: 1.5px solid var(--clr-border);
+    }
+
+    .trust-card .icon { font-size: 28px; margin-bottom: 10px; }
+
+    .trust-card h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .trust-card p {
+      font-size: 13px;
+      color: var(--clr-text-soft);
+      line-height: 1.5;
+    }
+
+    /* ========== FORM SECTION ========== */
+    .form-section {
+      padding: 80px 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-card {
+      background: var(--clr-card);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      border: 1.5px solid var(--clr-border);
+    }
+
+    .form-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .form-card .form-sub {
+      text-align: center;
+      color: var(--clr-text-soft);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .field { margin-bottom: 20px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--clr-text);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--clr-text);
+      background: var(--clr-bg);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--clr-accent);
+    }
+
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5550' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    .photo-upload {
+      border: 2px dashed var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--clr-bg);
+    }
+
+    .photo-upload:hover {
+      border-color: var(--clr-accent);
+      background: var(--clr-red-bg);
+    }
+
+    .photo-upload .upload-icon { font-size: 28px; margin-bottom: 4px; }
+
+    .photo-upload p {
+      font-size: 13px;
+      color: var(--clr-text-soft);
+    }
+
+    .photo-upload input { display: none; }
+
+    .photo-upload .file-name {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--clr-accent);
+      font-weight: 500;
+    }
+
+    .form-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin: 24px 0 8px;
+      border-top: 1.5px solid var(--clr-border);
+    }
+
+    .form-total .label {
+      font-size: 14px;
+      color: var(--clr-text-soft);
+    }
+
+    .form-total .price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--clr-text);
+    }
+
+    .pay-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(217,79,48,0.2);
+      margin-top: 8px;
+    }
+
+    .pay-btn:hover {
+      background: var(--clr-accent-hover);
+      box-shadow: 0 6px 28px rgba(217,79,48,0.3);
+      transform: translateY(-1px);
+    }
+
+    .pay-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-disclaimer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--clr-text-soft);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* ========== SUCCESS OVERLAY ========== */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .success-overlay.visible {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .success-card {
+      background: var(--clr-card);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: scaleIn 0.4s ease;
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-card .check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--clr-green-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+
+    .success-card h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .success-card p {
+      color: var(--clr-text-soft);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .success-card .ref-code {
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: 700;
+      background: var(--clr-bg-warm);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+      margin: 12px 0 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: #25D366;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+
+    .wa-btn:hover {
+      background: #1EBE59;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+    }
+
+    .wa-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid var(--clr-border);
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--clr-accent);
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--clr-text-soft);
+      line-height: 1.6;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 700px) {
+      .traffic-cards { grid-template-columns: 1fr; gap: 14px; }
+      .trust-cards { grid-template-columns: 1fr; gap: 12px; }
+      .form-card { padding: 32px 24px; }
+      .step { gap: 16px; }
+      .hero { padding: 90px 20px 50px; }
+    }
+
+    /* ========== ANIMATIONS ON SCROLL ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANGUAGE BAR -->
+  <nav class="lang-bar">
+    <span class="logo-mini">VeterinaryNow</span>
+    <button onclick="setLang('en')" class="active" id="btn-en">EN</button>
+    <button onclick="setLang('es')" id="btn-es">ES</button>
+    <button onclick="setLang('pt')" id="btn-pt">PT</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span data-i18n="hero_badge">Veterinarian available now</span>
+    </div>
+    <h1><span data-i18n="hero_title_1">Is your pet's situation an </span><span class="accent" data-i18n="hero_title_2">emergency?</span></h1>
+    <p class="subtitle" data-i18n="hero_subtitle">A real, licensed veterinarian reviews your case and tells you in 5 minutes — not an AI, a human.</p>
+    <a href="#triage-form" class="cta-btn">
+      <span data-i18n="hero_cta">Start Triage Now</span>
+      <span class="arrow">→</span>
+    </a>
+    <p class="hero-price"><strong>$15 USD</strong> · <span data-i18n="hero_price_note">One-time assessment</span></p>
+  </section>
+
+  <!-- TRIAGE TRAFFIC LIGHT -->
+  <section class="triage-section">
+    <div class="container">
+      <p class="section-label reveal" data-i18n="triage_label">How it works</p>
+      <h2 class="section-title reveal" data-i18n="triage_title">You get a clear answer — like a traffic light</h2>
+      <div class="traffic-cards">
+        <div class="traffic-card red reveal">
+          <div class="traffic-icon">🔴</div>
+          <h3 data-i18n="red_title">Emergency</h3>
+          <p data-i18n="red_desc">Rush to your nearest veterinary clinic immediately. Time is critical.</p>
+        </div>
+        <div class="traffic-card yellow reveal">
+          <div class="traffic-icon">🟡</div>
+          <h3 data-i18n="yellow_title">Observation</h3>
+          <p data-i18n="yellow_desc">Monitor closely. Follow the vet's instructions. Visit a clinic within 24-48h if it persists.</p>
+        </div>
+        <div class="traffic-card green reveal">
+          <div class="traffic-icon">🟢</div>
+          <h3 data-i18n="green_title">Non-urgent</h3>
+          <p data-i18n="green_desc">Your pet is likely fine. Schedule a routine check-up at your convenience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="container">
+      <p class="section-label reveal" data-i18n="how_label">Simple process</p>
+      <h2 class="section-title reveal" data-i18n="how_title">From worry to clarity in 4 steps</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 data-i18n="step1_title">Describe the symptoms</h3>
+            <p data-i18n="step1_desc">Fill in a quick form with your pet's species, symptom, and optionally a photo.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 data-i18n="step2_title">Pay securely — $15 USD</h3>
+            <p data-i18n="step2_desc">One flat fee. Credit card or crypto. No surprise charges.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 data-i18n="step3_title">Chat with the veterinarian</h3>
+            <p data-i18n="step3_desc">You'll get a WhatsApp link to speak directly with a licensed vet. AI translates in real-time if needed.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3 data-i18n="step4_title">Get your triage result</h3>
+            <p data-i18n="step4_desc">🔴 🟡 🟢 — You'll know exactly what to do next.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust-section">
+    <div class="container">
+      <p class="section-label reveal" data-i18n="trust_label">Why trust us</p>
+      <h2 class="section-title reveal" data-i18n="trust_title">Real expertise, not artificial guesses</h2>
+      <div class="trust-cards">
+        <div class="trust-card reveal">
+          <div class="icon">🩺</div>
+          <h4 data-i18n="trust1_title">Licensed Veterinarian</h4>
+          <p data-i18n="trust1_desc">Every assessment is made by a vet with a verified professional license.</p>
+        </div>
+        <div class="trust-card reveal">
+          <div class="icon">🌍</div>
+          <h4 data-i18n="trust2_title">Global Access</h4>
+          <p data-i18n="trust2_desc">AI-powered translation lets you communicate in your language, anywhere in the world.</p>
+        </div>
+        <div class="trust-card reveal">
+          <div class="icon">🔒</div>
+          <h4 data-i18n="trust3_title">Human-in-the-Loop</h4>
+          <p data-i18n="trust3_desc">AI assists with translation only. All medical decisions are made by a human professional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section" id="triage-form">
+    <div class="form-card reveal">
+      <h2 data-i18n="form_title">Start your triage</h2>
+      <p class="form-sub" data-i18n="form_sub">Fill in the details. It takes less than a minute.</p>
+
+      <form id="triageForm" onsubmit="handleSubmit(event)">
+        <div class="field">
+          <label for="petName" data-i18n="field_name">Your name</label>
+          <input type="text" id="petName" required>
+        </div>
+        <div class="field">
+          <label for="petSpecies" data-i18n="field_species">Pet type</label>
+          <select id="petSpecies" required>
+            <option value="" data-i18n="species_placeholder">Select...</option>
+            <option value="dog" data-i18n="species_dog">Dog</option>
+            <option value="cat" data-i18n="species_cat">Cat</option>
+            <option value="bird" data-i18n="species_bird">Bird</option>
+            <option value="rabbit" data-i18n="species_rabbit">Rabbit</option>
+            <option value="other" data-i18n="species_other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="symptom" data-i18n="field_symptom">Main symptom or concern</label>
+          <textarea id="symptom" required placeholder=""></textarea>
+        </div>
+        <div class="field">
+          <label data-i18n="field_photo">Photo or video (optional)</label>
+          <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+            <div class="upload-icon">📷</div>
+            <p data-i18n="photo_hint">Click to upload a photo or video</p>
+            <input type="file" id="photoInput" accept="image/*,video/*" onchange="showFileName(this)">
+            <div class="file-name" id="fileName"></div>
+          </div>
+        </div>
+
+        <div class="form-total">
+          <span class="label" data-i18n="form_total_label">Triage assessment</span>
+          <span class="price">$15 USD</span>
+        </div>
+
+        <button type="submit" class="pay-btn" data-i18n="form_pay_btn">Pay & Start Triage →</button>
+        <p class="form-disclaimer" data-i18n="form_disclaimer">This is a triage service only, not a full consultation. For treatment, visit your local clinic. By proceeding you accept our terms of service.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- SUCCESS OVERLAY -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-card">
+      <div class="check">✓</div>
+      <h2 data-i18n="success_title">Payment confirmed!</h2>
+      <p data-i18n="success_sub">Your reference code:</p>
+      <div class="ref-code" id="refCode">VN-0000</div>
+      <p data-i18n="success_instructions">Tap the button below to start your triage chat with our veterinarian. Please mention your reference code.</p>
+      <a id="waLink" href="#" target="_blank" class="wa-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="success_wa_btn">Open WhatsApp Chat</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">VeterinaryNow</div>
+    <p data-i18n="footer_text">Professional veterinary triage — powered by real humans, assisted by AI.<br>© 2025 Help a Human. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ============================================================
+    // i18n TRANSLATIONS
+    // ============================================================
+    const translations = {
+      en: {
+        hero_badge: "Veterinarian available now",
+        hero_title_1: "Is your pet's situation an ",
+        hero_title_2: "emergency?",
+        hero_subtitle: "A real, licensed veterinarian reviews your case and tells you in 5 minutes — not an AI, a human.",
+        hero_cta: "Start Triage Now",
+        hero_price_note: "One-time assessment",
+        triage_label: "How it works",
+        triage_title: "You get a clear answer — like a traffic light",
+        red_title: "Emergency",
+        red_desc: "Rush to your nearest veterinary clinic immediately. Time is critical.",
+        yellow_title: "Observation",
+        yellow_desc: "Monitor closely. Follow the vet's instructions. Visit a clinic within 24–48h if it persists.",
+        green_title: "Non-urgent",
+        green_desc: "Your pet is likely fine. Schedule a routine check-up at your convenience.",
+        how_label: "Simple process",
+        how_title: "From worry to clarity in 4 steps",
+        step1_title: "Describe the symptoms",
+        step1_desc: "Fill in a quick form with your pet's species, symptom, and optionally a photo.",
+        step2_title: "Pay securely — $15 USD",
+        step2_desc: "One flat fee. Credit card or crypto. No surprise charges.",
+        step3_title: "Chat with the veterinarian",
+        step3_desc: "You'll get a WhatsApp link to speak directly with a licensed vet. AI translates in real-time if needed.",
+        step4_title: "Get your triage result",
+        step4_desc: "🔴 🟡 🟢 — You'll know exactly what to do next.",
+        trust_label: "Why trust us",
+        trust_title: "Real expertise, not artificial guesses",
+        trust1_title: "Licensed Veterinarian",
+        trust1_desc: "Every assessment is made by a vet with a verified professional license.",
+        trust2_title: "Global Access",
+        trust2_desc: "AI-powered translation lets you communicate in your language, anywhere in the world.",
+        trust3_title: "Human-in-the-Loop",
+        trust3_desc: "AI assists with translation only. All medical decisions are made by a human professional.",
+        form_title: "Start your triage",
+        form_sub: "Fill in the details. It takes less than a minute.",
+        field_name: "Your name",
+        field_species: "Pet type",
+        species_placeholder: "Select...",
+        species_dog: "Dog",
+        species_cat: "Cat",
+        species_bird: "Bird",
+        species_rabbit: "Rabbit",
+        species_other: "Other",
+        field_symptom: "Main symptom or concern",
+        field_photo: "Photo or video (optional)",
+        photo_hint: "Click to upload a photo or video",
+        form_total_label: "Triage assessment",
+        form_pay_btn: "Pay & Start Triage →",
+        form_disclaimer: "This is a triage service only, not a full consultation. For treatment, visit your local clinic. By proceeding you accept our terms of service.",
+        success_title: "Payment confirmed!",
+        success_sub: "Your reference code:",
+        success_instructions: "Tap the button below to start your triage chat with our veterinarian. Please mention your reference code.",
+        success_wa_btn: "Open WhatsApp Chat",
+        footer_text: "Professional veterinary triage — powered by real humans, assisted by AI.<br>© 2025 VeterinaryNow. All rights reserved."
+      },
+      es: {
+        hero_badge: "Veterinaria disponible ahora",
+        hero_title_1: "¿La situación de tu mascota es una ",
+        hero_title_2: "emergencia?",
+        hero_subtitle: "Una médica veterinaria matriculada revisa tu caso y te responde en 5 minutos — no es una IA, es una humana.",
+        hero_cta: "Iniciar Triaje",
+        hero_price_note: "Pago único",
+        triage_label: "Cómo funciona",
+        triage_title: "Recibís una respuesta clara — como un semáforo",
+        red_title: "Emergencia",
+        red_desc: "Corré a la clínica veterinaria más cercana. El tiempo es crítico.",
+        yellow_title: "Observación",
+        yellow_desc: "Observá de cerca. Seguí las instrucciones de la veterinaria. Consultá en 24–48h si persiste.",
+        green_title: "No urgente",
+        green_desc: "Tu mascota probablemente está bien. Agendá un control de rutina cuando puedas.",
+        how_label: "Proceso simple",
+        how_title: "De la preocupación a la claridad en 4 pasos",
+        step1_title: "Describí los síntomas",
+        step1_desc: "Completá un formulario rápido con la especie, el síntoma y opcionalmente una foto.",
+        step2_title: "Pagá de forma segura — $15 USD",
+        step2_desc: "Un solo pago. Tarjeta de crédito o cripto. Sin cargos sorpresa.",
+        step3_title: "Chateá con la veterinaria",
+        step3_desc: "Recibís un link de WhatsApp para hablar directo con una veterinaria matriculada. La IA traduce en tiempo real si hace falta.",
+        step4_title: "Recibí tu resultado de triaje",
+        step4_desc: "🔴 🟡 🟢 — Vas a saber exactamente qué hacer.",
+        trust_label: "Por qué confiar",
+        trust_title: "Experiencia real, no suposiciones artificiales",
+        trust1_title: "Veterinaria Matriculada",
+        trust1_desc: "Cada evaluación la hace una veterinaria con matrícula profesional verificada.",
+        trust2_title: "Acceso Global",
+        trust2_desc: "Traducción asistida por IA para que te comuniques en tu idioma, desde cualquier parte del mundo.",
+        trust3_title: "Humano en el Proceso",
+        trust3_desc: "La IA solo asiste en traducción. Todas las decisiones médicas las toma una profesional humana.",
+        form_title: "Iniciá tu triaje",
+        form_sub: "Completá los datos. Toma menos de un minuto.",
+        field_name: "Tu nombre",
+        field_species: "Tipo de mascota",
+        species_placeholder: "Seleccionar...",
+        species_dog: "Perro",
+        species_cat: "Gato",
+        species_bird: "Ave",
+        species_rabbit: "Conejo",
+        species_other: "Otro",
+        field_symptom: "Síntoma o preocupación principal",
+        field_photo: "Foto o video (opcional)",
+        photo_hint: "Clic para subir una foto o video",
+        form_total_label: "Evaluación de triaje",
+        form_pay_btn: "Pagar e Iniciar Triaje →",
+        form_disclaimer: "Este es un servicio de triaje solamente, no una consulta completa. Para tratamiento, visitá tu clínica local. Al continuar aceptás nuestros términos de servicio.",
+        success_title: "¡Pago confirmado!",
+        success_sub: "Tu código de referencia:",
+        success_instructions: "Tocá el botón de abajo para iniciar el chat de triaje con nuestra veterinaria. Mencioná tu código de referencia.",
+        success_wa_btn: "Abrir Chat de WhatsApp",
+        footer_text: "Triaje veterinario profesional — realizado por humanos, asistido por IA.<br>© 2025 VeterinaryNow. Todos los derechos reservados."
+      },
+      pt: {
+        hero_badge: "Veterinária disponível agora",
+        hero_title_1: "A situação do seu pet é uma ",
+        hero_title_2: "emergência?",
+        hero_subtitle: "Uma médica veterinária registrada analisa seu caso e responde em 5 minutos — não é uma IA, é uma humana.",
+        hero_cta: "Iniciar Triagem",
+        hero_price_note: "Pagamento único",
+        triage_label: "Como funciona",
+        triage_title: "Você recebe uma resposta clara — como um semáforo",
+        red_title: "Emergência",
+        red_desc: "Corra para a clínica veterinária mais próxima. O tempo é crítico.",
+        yellow_title: "Observação",
+        yellow_desc: "Monitore de perto. Siga as instruções da veterinária. Consulte em 24–48h se persistir.",
+        green_title: "Não urgente",
+        green_desc: "Seu pet provavelmente está bem. Agende um check-up de rotina quando puder.",
+        how_label: "Processo simples",
+        how_title: "Da preocupação à clareza em 4 passos",
+        step1_title: "Descreva os sintomas",
+        step1_desc: "Preencha um formulário rápido com a espécie, o sintoma e opcionalmente uma foto.",
+        step2_title: "Pague com segurança — $15 USD",
+        step2_desc: "Uma única taxa. Cartão de crédito ou cripto. Sem cobranças surpresa.",
+        step3_title: "Converse com a veterinária",
+        step3_desc: "Você recebe um link de WhatsApp para falar direto com uma veterinária registrada. A IA traduz em tempo real se necessário.",
+        step4_title: "Receba seu resultado de triagem",
+        step4_desc: "🔴 🟡 🟢 — Você vai saber exatamente o que fazer.",
+        trust_label: "Por que confiar",
+        trust_title: "Experiência real, não suposições artificiais",
+        trust1_title: "Veterinária Registrada",
+        trust1_desc: "Cada avaliação é feita por uma veterinária com registro profissional verificado.",
+        trust2_title: "Acesso Global",
+        trust2_desc: "Tradução assistida por IA para você se comunicar no seu idioma, de qualquer lugar do mundo.",
+        trust3_title: "Humano no Processo",
+        trust3_desc: "A IA só auxilia na tradução. Todas as decisões médicas são tomadas por uma profissional humana.",
+        form_title: "Inicie sua triagem",
+        form_sub: "Preencha os dados. Leva menos de um minuto.",
+        field_name: "Seu nome",
+        field_species: "Tipo de pet",
+        species_placeholder: "Selecionar...",
+        species_dog: "Cachorro",
+        species_cat: "Gato",
+        species_bird: "Pássaro",
+        species_rabbit: "Coelho",
+        species_other: "Outro",
+        field_symptom: "Sintoma ou preocupação principal",
+        field_photo: "Foto ou vídeo (opcional)",
+        photo_hint: "Clique para enviar uma foto ou vídeo",
+        form_total_label: "Avaliação de triagem",
+        form_pay_btn: "Pagar e Iniciar Triagem →",
+        form_disclaimer: "Este é um serviço de triagem apenas, não uma consulta completa. Para tratamento, visite sua clínica local. Ao continuar, você aceita nossos termos de serviço.",
+        success_title: "Pagamento confirmado!",
+        success_sub: "Seu código de referência:",
+        success_instructions: "Toque no botão abaixo para iniciar o chat de triagem com nossa veterinária. Mencione seu código de referência.",
+        success_wa_btn: "Abrir Chat do WhatsApp",
+        footer_text: "Triagem veterinária profissional — realizada por humanos, assistida por IA.<br>© 2025 VeterinaryNow. Todos os direitos reservados."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      // Update buttons
+      document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+
+      // Update all translatable elements
+      const t = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = t[key];
+          } else {
+            el.innerHTML = t[key];
+          }
+        }
+      });
+
+      // Update page title
+      const titles = {
+        en: "VeterinaryNow — Veterinary Triage in 5 Minutes",
+        es: "VeterinaryNow — Triaje Veterinario en 5 Minutos",
+        pt: "VeterinaryNow — Triagem Veterinária em 5 Minutos"
+      };
+      document.title = titles[lang];
+    }
+
+    // ============================================================
+    // FILE UPLOAD
+    // ============================================================
+    function showFileName(input) {
+      const name = input.files[0]?.name || '';
+      document.getElementById('fileName').textContent = name;
+    }
+
+    // ============================================================
+    // FORM SUBMISSION (simulates payment → shows success)
+    // ============================================================
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('petName').value;
+      const species = document.getElementById('petSpecies').value;
+      const symptom = document.getElementById('symptom').value;
+
+      // Generate ref code
+      const ref = 'VN-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      document.getElementById('refCode').textContent = ref;
+
+      // Build WhatsApp message
+      const speciesLabels = {
+        en: { dog: 'Dog', cat: 'Cat', bird: 'Bird', rabbit: 'Rabbit', other: 'Other' },
+        es: { dog: 'Perro', cat: 'Gato', bird: 'Ave', rabbit: 'Conejo', other: 'Otro' },
+        pt: { dog: 'Cachorro', cat: 'Gato', bird: 'Pássaro', rabbit: 'Coelho', other: 'Outro' }
+      };
+
+      const msgs = {
+        en: `Hello! I'm ${name}. I paid for triage ${ref}.\n\nPet: ${speciesLabels.en[species] || species}\nSymptom: ${symptom}`,
+        es: `¡Hola! Soy ${name}. Pagué el triaje ${ref}.\n\nMascota: ${speciesLabels.es[species] || species}\nSíntoma: ${symptom}`,
+        pt: `Olá! Sou ${name}. Paguei a triagem ${ref}.\n\nPet: ${speciesLabels.pt[species] || species}\nSintoma: ${symptom}`
+      };
+
+      const waMessage = encodeURIComponent(msgs[currentLang] || msgs.en);
+      // Replace with your actual WhatsApp number (with country code, no + or spaces)
+      const waNumber = '5491100000000';
+      document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${waMessage}`;
+
+      // Show success overlay
+      document.getElementById('successOverlay').classList.add('visible');
+    }
+
+    // Close overlay on background click
+    document.getElementById('successOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('visible');
+    });
+
+    // ============================================================
+    // SCROLL REVEAL
+    // ============================================================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
