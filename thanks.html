@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeterinaryNow — Complete Your Triage</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --clr-bg: #FDFAF6;
+      --clr-bg-warm: #F7F0E8;
+      --clr-text: #1A1A1A;
+      --clr-text-soft: #5A5550;
+      --clr-accent: #D94F30;
+      --clr-accent-hover: #C14228;
+      --clr-green: #2D8F5E;
+      --clr-green-bg: #E8F5EE;
+      --clr-border: #E8E0D8;
+      --clr-card: #FFFFFF;
+      --font-display: 'Fraunces', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    /* ========== LANGUAGE SWITCHER ========== */
+    .lang-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 20px;
+      background: rgba(253,250,246,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .lang-bar button {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      color: var(--clr-text-soft);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .lang-bar button:hover { color: var(--clr-text); }
+
+    .lang-bar button.active {
+      background: var(--clr-text);
+      color: var(--clr-bg);
+      border-color: var(--clr-text);
+    }
+
+    .lang-bar .logo-mini {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--clr-accent);
+      margin-right: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ========== BLOCKED PAGE ========== */
+    .blocked {
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .blocked .icon { font-size: 48px; margin-bottom: 16px; }
+
+    .blocked h1 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .blocked p {
+      color: var(--clr-text-soft);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .blocked a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--clr-accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(217,79,48,0.2);
+    }
+
+    .blocked a:hover {
+      background: var(--clr-accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ========== FORM CARD ========== */
+    .thanks-card {
+      background: var(--clr-card);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      border: 1.5px solid var(--clr-border);
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .thanks-card .check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--clr-green-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+
+    .thanks-card h1 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .thanks-card .subtitle {
+      text-align: center;
+      color: var(--clr-text-soft);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .field { margin-bottom: 20px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--clr-text);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--clr-text);
+      background: var(--clr-bg);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--clr-accent);
+    }
+
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5550' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background: #25D366;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+      margin-top: 24px;
+    }
+
+    .wa-btn:hover {
+      background: #1EBE59;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+    }
+
+    .wa-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .wa-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--clr-text-soft);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    footer .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--clr-accent);
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--clr-text-soft);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .thanks-card { padding: 32px 24px; }
+      body { padding: 60px 20px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LANGUAGE BAR -->
+  <nav class="lang-bar">
+    <span class="logo-mini">VeterinaryNow</span>
+    <button onclick="setLang('en')" class="active" id="btn-en">EN</button>
+    <button onclick="setLang('es')" id="btn-es">ES</button>
+    <button onclick="setLang('pt')" id="btn-pt">PT</button>
+  </nav>
+
+  <!-- BLOCKED (shown if user didn't come from PayPal) -->
+  <div class="blocked" id="blockedView" style="display:none;">
+    <div class="icon">🔒</div>
+    <h1 data-i18n="blocked_title">Payment required</h1>
+    <p data-i18n="blocked_desc">You need to complete payment before accessing the triage form. Please go back and pay first.</p>
+    <a href="https://veterinarynow.com/#triage-form" data-i18n="blocked_btn">Go to Payment →</a>
+  </div>
+
+  <!-- THANKS FORM (shown only after PayPal redirect) -->
+  <div class="thanks-card" id="thanksForm" style="display:none;">
+    <div class="check">✓</div>
+    <h1 data-i18n="thanks_title">Payment received!</h1>
+    <p class="subtitle" data-i18n="thanks_sub">Now tell us about your pet so the veterinarian is ready for you.</p>
+
+    <form id="triageForm" onsubmit="handleSubmit(event)">
+      <div class="field">
+        <label for="ownerName" data-i18n="field_name">Your name</label>
+        <input type="text" id="ownerName" required>
+      </div>
+      <div class="field">
+        <label for="petType" data-i18n="field_pet_type">Pet type</label>
+        <select id="petType" required>
+          <option value="" data-i18n="pet_placeholder">Select...</option>
+          <option value="dog" data-i18n="pet_dog">Dog</option>
+          <option value="cat" data-i18n="pet_cat">Cat</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="petName" data-i18n="field_pet_name">Pet's name</label>
+        <input type="text" id="petName" required>
+      </div>
+      <div class="field">
+        <label for="symptom" data-i18n="field_symptom">Main symptom or concern</label>
+        <textarea id="symptom" required></textarea>
+      </div>
+
+      <button type="submit" class="wa-btn" id="waSubmitBtn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="wa_btn">Start WhatsApp Chat →</span>
+      </button>
+
+      <p class="disclaimer" data-i18n="thanks_disclaimer">You can also send photos and videos directly in the WhatsApp chat. The veterinarian will review everything.</p>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-logo">VeterinaryNow</div>
+    <p data-i18n="footer_text">Professional veterinary triage — powered by real humans, assisted by AI.<br>&copy; 2025 VeterinaryNow. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ============================================================
+    // ACCESS VALIDATION
+    // ============================================================
+    // PayPal sets document.referrer when redirecting.
+    // We also mark sessionStorage so refreshing the page still works.
+    (function validateAccess() {
+      const referrer = document.referrer || '';
+      const isFromPayPal = referrer.includes('paypal.com');
+      const hasSession = sessionStorage.getItem('vn_paid') === 'true';
+
+      if (isFromPayPal) {
+        sessionStorage.setItem('vn_paid', 'true');
+      }
+
+      if (isFromPayPal || hasSession) {
+        document.getElementById('thanksForm').style.display = 'block';
+        document.getElementById('blockedView').style.display = 'none';
+      } else {
+        document.getElementById('thanksForm').style.display = 'none';
+        document.getElementById('blockedView').style.display = 'block';
+      }
+    })();
+
+    // ============================================================
+    // i18n TRANSLATIONS
+    // ============================================================
+    const translations = {
+      en: {
+        blocked_title: "Payment required",
+        blocked_desc: "You need to complete payment before accessing the triage form. Please go back and pay first.",
+        blocked_btn: "Go to Payment →",
+        thanks_title: "Payment received!",
+        thanks_sub: "Now tell us about your pet so the veterinarian is ready for you.",
+        field_name: "Your name",
+        field_pet_type: "Pet type",
+        pet_placeholder: "Select...",
+        pet_dog: "Dog",
+        pet_cat: "Cat",
+        field_pet_name: "Pet's name",
+        field_symptom: "Main symptom or concern",
+        wa_btn: "Start WhatsApp Chat →",
+        thanks_disclaimer: "You can also send photos and videos directly in the WhatsApp chat. The veterinarian will review everything.",
+        footer_text: "Professional veterinary triage — powered by real humans, assisted by AI.<br>&copy; 2025 VeterinaryNow. All rights reserved."
+      },
+      es: {
+        blocked_title: "Pago requerido",
+        blocked_desc: "Necesitás completar el pago antes de acceder al formulario de triaje. Por favor, volvé y pagá primero.",
+        blocked_btn: "Ir al Pago →",
+        thanks_title: "¡Pago recibido!",
+        thanks_sub: "Ahora contanos sobre tu mascota para que la veterinaria esté lista para vos.",
+        field_name: "Tu nombre",
+        field_pet_type: "Tipo de mascota",
+        pet_placeholder: "Seleccionar...",
+        pet_dog: "Perro",
+        pet_cat: "Gato",
+        field_pet_name: "Nombre de tu mascota",
+        field_symptom: "Síntoma o preocupación principal",
+        wa_btn: "Iniciar Chat de WhatsApp →",
+        thanks_disclaimer: "También podés enviar fotos y videos directamente en el chat de WhatsApp. La veterinaria revisa todo.",
+        footer_text: "Triaje veterinario profesional — realizado por humanos, asistido por IA.<br>&copy; 2025 VeterinaryNow. Todos los derechos reservados."
+      },
+      pt: {
+        blocked_title: "Pagamento necessário",
+        blocked_desc: "Você precisa completar o pagamento antes de acessar o formulário de triagem. Por favor, volte e pague primeiro.",
+        blocked_btn: "Ir para o Pagamento →",
+        thanks_title: "Pagamento recebido!",
+        thanks_sub: "Agora conte-nos sobre seu pet para que a veterinária esteja pronta para você.",
+        field_name: "Seu nome",
+        field_pet_type: "Tipo de pet",
+        pet_placeholder: "Selecionar...",
+        pet_dog: "Cachorro",
+        pet_cat: "Gato",
+        field_pet_name: "Nome do seu pet",
+        field_symptom: "Sintoma ou preocupação principal",
+        wa_btn: "Iniciar Chat no WhatsApp →",
+        thanks_disclaimer: "Você também pode enviar fotos e vídeos diretamente no chat do WhatsApp. A veterinária analisa tudo.",
+        footer_text: "Triagem veterinária profissional — realizada por humanos, assistida por IA.<br>&copy; 2025 VeterinaryNow. Todos os direitos reservados."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('.lang-bar button').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+
+      const t = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = t[key];
+          } else {
+            el.innerHTML = t[key];
+          }
+        }
+      });
+
+      const titles = {
+        en: "VeterinaryNow — Complete Your Triage",
+        es: "VeterinaryNow — Completá tu Triaje",
+        pt: "VeterinaryNow — Complete sua Triagem"
+      };
+      document.title = titles[lang];
+    }
+
+    // ============================================================
+    // FORM SUBMISSION → WHATSAPP
+    // ============================================================
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('ownerName').value.trim();
+      const petType = document.getElementById('petType').value;
+      const petName = document.getElementById('petName').value.trim();
+      const symptom = document.getElementById('symptom').value.trim();
+
+      const petLabels = {
+        en: { dog: 'Dog', cat: 'Cat' },
+        es: { dog: 'Perro', cat: 'Gato' },
+        pt: { dog: 'Cachorro', cat: 'Gato' }
+      };
+
+      const msgs = {
+        en: `Hi! I'm ${name}. I just paid for a triage assessment.\n\nPet: ${petLabels.en[petType]} named ${petName}\nSymptom: ${symptom}\n\nI'm ready for the triage.`,
+        es: `¡Hola! Soy ${name}. Acabo de pagar por una evaluación de triaje.\n\nMascota: ${petLabels.es[petType]} llamado/a ${petName}\nSíntoma: ${symptom}\n\nEstoy listo/a para el triaje.`,
+        pt: `Olá! Sou ${name}. Acabei de pagar por uma avaliação de triagem.\n\nPet: ${petLabels.pt[petType]} chamado/a ${petName}\nSintoma: ${symptom}\n\nEstou pronto/a para a triagem.`
+      };
+
+      const waMessage = encodeURIComponent(msgs[currentLang] || msgs.en);
+
+      // ⚠️ REPLACE with your actual WhatsApp number (country code + number, no + or spaces)
+      const waNumber = '5491100000000';
+
+      window.location.href = `https://wa.me/${waNumber}?text=${waMessage}`;
+    }
+  </script>
+
+</body>
+</html>
